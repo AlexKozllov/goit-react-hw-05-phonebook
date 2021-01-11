@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { CSSTransition } from 'react-transition-group';
-// import styled from "styled-components";
 import s from "./contactForm.module.css";
 import shiftAlert from '../animation/shiftAlert.module.css';
 import { v4 as uuidv4 } from "uuid";
-import ExistAlert from "../existAlert/ExistAlert";
+import ExistAlert from "../alert/Alert";
 
-const InitialState = { name: "", number: "" };
+const InitialState = { name: "", number: "", validateForm:true };
 class ContactForm extends Component {
   state = InitialState;
 
@@ -31,7 +30,8 @@ class ContactForm extends Component {
     const { onCheckUnique } = this.props;
     const { name, number } = this.state;
     if (!name || !number) {
-      alert("Some filed is empty");
+      this.setState({validateForm:false})
+      // alert("Some filed is empty");
       return false;
     }
     return onCheckUnique(name);
@@ -39,10 +39,13 @@ class ContactForm extends Component {
 
   render() {
     const { isExistContact } = this.props;
-     const { name, number } = this.state;
+     const { name, number, validateForm } = this.state;
     return (<>
      <CSSTransition in={isExistContact} classNames={shiftAlert} timeout={250} unmountOnExit>
-          <ExistAlert/>
+          <ExistAlert text="aaaaa"/>
+      </CSSTransition>
+      <CSSTransition in={!validateForm} classNames={shiftAlert} timeout={250} unmountOnExit>
+          <ExistAlert text="bbbbb"/>
       </CSSTransition>
       <form className={s.contactForm} onSubmit={this.handleSubmit}>
         <label>
