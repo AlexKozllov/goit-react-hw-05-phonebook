@@ -1,0 +1,15 @@
+.wrapper {
+display: block;
+margin: 0 auto;
+width: 400px;
+
+}
+
+.headerPhoneboo {
+    /* display: inline; */
+    width: 130px;
+    color: blue;
+    font-size: 24px;
+
+
+}

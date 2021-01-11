@@ -1,0 +1,29 @@
+.findField {
+    margin-top: 10px;
+    display: block;
+    padding: 10px;
+    box-shadow: 2px 3px 8px 1px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+ 
+}
+.findField h3{
+    font-weight: normal;
+}
+
+.fade-enter {
+    opacity: 0;
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }

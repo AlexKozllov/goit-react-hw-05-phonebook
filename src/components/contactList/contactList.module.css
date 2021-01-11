@@ -1,0 +1,24 @@
+.listItem {
+    margin-top: 10px;
+    /* display: block; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    box-shadow: 2px 3px 8px 1px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+}
+
+.itemName{
+    width: 30%;
+}
+
+.listItem button{
+    display: block;
+    width: 30px;
+    height: 30px;
+ color: #fff;
+ background-color: red;
+ border: 0;
+ border-radius: 5px;
+}
