@@ -1,0 +1,17 @@
+.box{
+    width: 250px;
+    height: 80px;
+    padding-top: 10px;
+    padding-left: 20px;
+    background-color: salmon;
+    /* border: 1px solid ; */
+    border-radius: 10px;
+    color: #fff;
+    position: fixed;
+    right: calc(50% - 470px);
+    box-shadow: 2px 3px 8px 1px rgba(0, 0, 0, 0.3);
+}
+
+.box h4{
+    font-size: 20px;
+}

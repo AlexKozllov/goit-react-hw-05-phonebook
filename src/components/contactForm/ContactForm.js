@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { CSSTransition } from 'react-transition-group';
 // import styled from "styled-components";
 import s from "./contactForm.module.css";
+import shiftAlert from '../animation/shiftAlert.module.css';
 import { v4 as uuidv4 } from "uuid";
+import ExistAlert from "../existAlert/ExistAlert";
 
 const InitialState = { name: "", number: "" };
 class ContactForm extends Component {
@@ -35,8 +38,12 @@ class ContactForm extends Component {
   };
 
   render() {
-    const { name, number } = this.state;
-    return (
+    const { isExistContact } = this.props;
+     const { name, number } = this.state;
+    return (<>
+     <CSSTransition in={isExistContact} classNames={shiftAlert} timeout={250} unmountOnExit>
+          <ExistAlert/>
+      </CSSTransition>
       <form className={s.contactForm} onSubmit={this.handleSubmit}>
         <label>
           Name
@@ -60,6 +67,7 @@ class ContactForm extends Component {
           Add contact
         </button>
       </form>
+      </>
     );
   }
 }

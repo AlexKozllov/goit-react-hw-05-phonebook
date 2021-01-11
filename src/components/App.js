@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import ContactForm from "./contactForm/ContactForm";
 import ContactList from "./contactList/ContactList";
 import Filter from "./filter/Filter";
-import ExistAlert from "./existAlert/ExistAlert";
+// import ExistAlert from "./existAlert/ExistAlert";
 
 import s from "./app.module.css";
 import scaleAnimation from './animation/scaleAnimation.module.css';
@@ -13,6 +13,7 @@ class App extends Component {
   state = {
     contacts: [],
     filter: "",
+    isExistContact: false
   };
 
   componentDidMount() {
@@ -61,19 +62,18 @@ class App extends Component {
     const isExistContact = !!contacts.find(
       (item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase()
     );
-    // isExistContact && alert("Contact is already exist");
+    isExistContact ? this.setState({isExistContact : true}) : this.setState({isExistContact : false})
 
-    return !isExistContact;
+
+    return !isExistContact
   };
 
   render() {
-    const { filter, contacts } = this.state;
+    const { filter, contacts,isExistContact } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
       <div className={s.wrapper}>
-        <CSSTransition in={}>
-          <ExistAlert/>
-        </CSSTransition>
+        
         <CSSTransition in={true} appear classNames={shiftAppear} timeout={500} unmountOnExit>
           <h1 className={s.headerPhoneboo}>Phonebook</h1>
         </CSSTransition>
@@ -82,6 +82,7 @@ class App extends Component {
           handlerInput={this.handlerInput}
           addContacts={this.addContacts}
           onCheckUnique={this.onCheckUnique}
+          isExistContact={isExistContact}
         />
         <CSSTransition in={contacts.length>1}
          classNames={scaleAnimation} 
