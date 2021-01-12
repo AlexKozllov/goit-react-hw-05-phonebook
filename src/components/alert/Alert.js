@@ -1,6 +1,6 @@
 import React from 'react';
 
-import s from './existAlert.module.css';
+import s from './alert.module.css';
 
 const Alert = ({text}) => {
     return (
