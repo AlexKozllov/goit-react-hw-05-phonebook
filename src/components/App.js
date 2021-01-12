@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition } from "react-transition-group";
+
 import ContactForm from "./contactForm/ContactForm";
 import ContactList from "./contactList/ContactList";
 import Filter from "./filter/Filter";
-// import ExistAlert from "./existAlert/ExistAlert";
 
 import s from "./app.module.css";
-import scaleAnimation from './animation/scaleAnimation.module.css';
-import shiftAppear from './animation/shiftAppear.module.css';
+import scaleAnimation from "./animation/scaleAnimation.module.css";
+import shiftAppear from "./animation/shiftAppear.module.css";
 
 class App extends Component {
   state = {
     contacts: [],
     filter: "",
-    isExistContact: false
+    isExistContact: false,
   };
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class App extends Component {
 
   addContacts = (stateForm) => {
     this.setState((prevState) => {
-      return { contacts: [stateForm, ...prevState.contacts ] };
+      return { contacts: [stateForm, ...prevState.contacts] };
     });
   };
 
@@ -62,43 +62,49 @@ class App extends Component {
     const isExistContact = !!contacts.find(
       (item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase()
     );
-    isExistContact ? this.setState({isExistContact : true}) : this.setState({isExistContact : false})
+    isExistContact
+      ? this.setState({ isExistContact: true })
+      : this.setState({ isExistContact: false });
 
-
-    return !isExistContact
+    return !isExistContact;
   };
 
   render() {
-    const { filter, contacts,isExistContact } = this.state;
+    const { filter, contacts, isExistContact } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
       <div className={s.wrapper}>
-        
-        <CSSTransition in={true} appear classNames={shiftAppear} timeout={500} unmountOnExit>
+        <CSSTransition
+          in={true}
+          appear
+          classNames={shiftAppear}
+          timeout={500}
+          unmountOnExit
+        >
           <h1 className={s.headerPhoneboo}>Phonebook</h1>
         </CSSTransition>
-        
+
         <ContactForm
           handlerInput={this.handlerInput}
           addContacts={this.addContacts}
           onCheckUnique={this.onCheckUnique}
           isExistContact={isExistContact}
         />
-        <CSSTransition in={contacts.length>1}
-         classNames={scaleAnimation} 
-         timeout={250} 
-         unmountOnExit>
-           <Filter filterValue={filter} hendleFilter={this.hendleFilter} />
+        <CSSTransition
+          in={contacts.length > 1}
+          classNames={scaleAnimation}
+          timeout={250}
+          unmountOnExit
+        >
+          <Filter filterValue={filter} hendleFilter={this.hendleFilter} />
         </CSSTransition>
-      
-        
-          {contacts.length > 0 && <ContactList
+
+        {contacts.length > 0 && (
+          <ContactList
             listContacts={visibleContacts}
             hendleBtnDelete={this.hendleBtnDelete}
-          />}
-          
-     
-       
+          />
+        )}
       </div>
     );
   }
